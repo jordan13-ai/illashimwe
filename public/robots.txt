@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block internal Next.js build artifacts
+Disallow: /_next/
+Disallow: /api/
+Disallow: /__next*
+
+# Block duplicate /faqs route (canonical is /faq/)
+Disallow: /faqs/
+Disallow: /faqs
+
+Sitemap: https://illashimwe.com/sitemap.xml

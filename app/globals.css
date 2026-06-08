@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+@theme {
+  /* Colors - matching HTML source exactly */
+  --color-primary: #f78a1d;
+  --color-safari-green: #2E7D32;
+  --color-deep-brown: #2B140A;
+  --color-cream: #FDFBF7;
+  --color-background-light: #f8f7f5;
+  --color-background-dark: #23190f;
+
+  /* Font Families */
+  --font-serif: var(--font-noto-serif), serif;
+  --font-sans: var(--font-noto-sans), sans-serif;
+  --font-molot: var(--font-molot), sans-serif;
+
+  /* Border Radius */
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+/* Custom Utilities / Base Styles */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  /* px-6 equivalent */
+  max-width: 80rem;
+  /* max-w-7xl */
+}
+
+/* Base resets */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-background-dark);
+  --foreground: var(--color-cream);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: 90%;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  /* Use Noto Sans by default */
+}
+
+/* Removed global h1 override to let individual components control their font */
+
+/* Material Symbols scaling/reset */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Custom Typography for Content (Replacing @tailwindcss/typography) */
+.rich-text {
+  @apply text-gray-600 leading-relaxed text-lg;
+  color: #4b5563;
+  /* gray-600 */
+}
+
+.rich-text p,
+.rich-text span,
+.rich-text li,
+.rich-text div {
+  @apply text-gray-600 mb-6;
+  color: #4b5563;
+}
+
+.rich-text h3 {
+  @apply text-2xl font-molot text-deep-brown mt-12 mb-4;
+}
+
+.rich-text h4 {
+  @apply text-lg font-bold text-primary mt-6 mb-2 text-deep-brown;
+}
+
+.rich-text ul {
+  @apply list-disc pl-6 space-y-2 mb-8;
+}
+
+.rich-text li {
+  @apply pl-1;
+}
+
+.rich-text strong {
+  @apply font-bold text-deep-brown;
 }
