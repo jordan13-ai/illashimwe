@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
-
+import { motion, AnimatePresence } from "framer-motion";
 
 const TESTIMONIALS = [
     {
@@ -42,63 +42,89 @@ export default function Testimonials() {
     const activeReview = TESTIMONIALS[activeIndex];
 
     return (
-        <section className="bg-cream py-24 px-6 overflow-hidden relative">
-            <div className="max-w-4xl mx-auto text-center relative z-10">
-                <div className="flex flex-col items-center gap-4 mb-4">
-                    <span className="text-primary uppercase tracking-[0.2em] font-bold text-xs">Client Stories</span>
-                    <div className="h-px w-12 bg-primary"></div>
+        <section className="bg-deep-brown py-32 px-6 overflow-hidden relative">
+            <div className="max-w-[1000px] mx-auto text-center relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                    className="flex flex-col items-center gap-6 mb-16"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-[1px] bg-primary" />
+                        <span className="font-[family-name:var(--font-script)] text-primary text-3xl md:text-4xl">Client Stories</span>
+                        <div className="w-12 h-[1px] bg-primary" />
+                    </div>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black uppercase tracking-tight text-white leading-none">
+                        Whispers from the <br /> Savannah
+                    </h2>
+                </motion.div>
+
+                <div className="min-h-[350px] relative flex flex-col items-center justify-center">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-10 text-white/5">
+                        <Quote className="w-32 h-32 fill-current" />
+                    </div>
+
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeIndex}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col items-center justify-center relative z-10 w-full"
+                        >
+                            <div className="flex gap-1 text-primary mb-8">
+                                {[...Array(activeReview.rating)].map((_, i) => (
+                                    <Star key={i} className="w-6 h-6 fill-current" />
+                                ))}
+                            </div>
+
+                            <blockquote className="text-2xl md:text-4xl lg:text-5xl font-serif leading-tight text-white mb-10 italic max-w-4xl tracking-wide font-light">
+                                &quot;{activeReview.quote}&quot;
+                            </blockquote>
+
+                            <div>
+                                <p className="font-bold text-white text-lg tracking-widest uppercase mb-1">{activeReview.author}</p>
+                                <p className="text-white/50 text-sm uppercase tracking-[0.2em]">{activeReview.location}</p>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
 
-                <h2 className="text-4xl md:text-5xl font-molot font-black mb-2 text-deep-brown">
-                    Whispers from the <span className="italic text-primary font-serif">Savannah</span>
-                </h2>
-
-                <p className="text-deep-brown/60 text-sm font-bold uppercase tracking-widest mb-12">
-                    500+ 5-Star Reviews
-                </p>
-
-                <div className="min-h-[300px] flex flex-col items-center justify-center transition-all duration-500">
-                    <div className="mb-8 text-primary/20">
-                        <Quote className="w-16 h-16 fill-current" />
-                    </div>
-
-                    <div className="flex gap-1 text-primary mb-8">
-                        {[...Array(activeReview.rating)].map((_, i) => (
-                            <Star key={i} className="w-6 h-6 fill-current" />
-                        ))}
-                    </div>
-
-                    <blockquote className="text-2xl md:text-4xl font-serif leading-relaxed text-deep-brown/90 mb-10 italic max-w-3xl">
-                        &quot;{activeReview.quote}&quot;
-                    </blockquote>
-
-                    <div>
-                        <p className="font-bold text-deep-brown text-lg">{activeReview.author}</p>
-                        <p className="text-deep-brown/60 text-sm uppercase tracking-wider">{activeReview.location}</p>
-                    </div>
-                </div>
-
-                <div className="flex justify-center gap-6 mt-12">
+                <div className="flex justify-center items-center gap-8 mt-16">
                     <button
                         onClick={prevTestimonial}
-                        className="bg-transparent hover:bg-primary hover:text-deep-brown text-deep-brown border border-deep-brown/10 hover:border-primary p-4 rounded-full transition-all shadow-sm group"
+                        className="w-14 h-14 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:text-deep-brown transition-all duration-300 transform hover:-translate-x-1"
                         aria-label="Previous testimonial"
                     >
                         <ChevronLeft className="w-6 h-6" />
                     </button>
+                    <div className="flex gap-3">
+                        {TESTIMONIALS.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setActiveIndex(idx)}
+                                className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${activeIndex === idx ? "bg-primary w-8" : "bg-white/20 hover:bg-white/50"}`}
+                                aria-label={`Go to testimonial ${idx + 1}`}
+                            />
+                        ))}
+                    </div>
                     <button
                         onClick={nextTestimonial}
-                        className="bg-transparent hover:bg-primary hover:text-deep-brown text-deep-brown border border-deep-brown/10 hover:border-primary p-4 rounded-full transition-all shadow-sm group"
+                        className="w-14 h-14 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:text-deep-brown transition-all duration-300 transform hover:translate-x-1"
                         aria-label="Next testimonial"
                     >
                         <ChevronRight className="w-6 h-6" />
                     </button>
                 </div>
             </div>
-
-            {/* Background decorative elements */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border-[60px] border-deep-brown/20 blur-3xl"></div>
+            
+            {/* Decorative Gradients */}
+            <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+                <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
+                <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-white/5 rounded-full blur-[100px]" />
             </div>
         </section>
     );

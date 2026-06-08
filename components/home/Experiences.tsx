@@ -1,115 +1,95 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { experiences } from "@/data/homepage";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Experiences() {
-    const [current, setCurrent] = useState(0);
-
-    const next = () => {
-        setCurrent((prev) => (prev + 1) % experiences.length);
-    };
-
-    const prev = () => {
-        setCurrent((prev) => (prev - 1 + experiences.length) % experiences.length);
-    };
-
-    // Calculate visible slides for carousel effect (3 cards visible on desktop)
-    const getVisibleSlides = () => {
-        const slides = [];
-        for (let i = 0; i < 3; i++) {
-            slides.push(experiences[(current + i) % experiences.length]);
-        }
-        return slides;
-    };
-
     return (
-        <section className="bg-background-light py-28 px-6 md:px-0 relative overflow-hidden">
-            <div className="container mx-auto max-w-7xl">
-                <div className="flex flex-col lg:flex-row gap-16 items-center">
-
-                    {/* Left Column: Content */}
+        <section className="bg-deep-brown py-32 px-6 overflow-hidden text-white relative">
+            {/* Soft decorative blur */}
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+            
+            <div className="container mx-auto max-w-[1400px] relative z-10">
+                <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="lg:w-1/3 relative z-10"
+                        className="flex items-center justify-center gap-4 mb-6"
                     >
-                        <div className="relative">
-                            <p className="font-[family-name:var(--font-script)] text-primary text-5xl md:text-6xl mb-0 pl-1">
-                                Choose your
-                            </p>
-                            <h2 className="text-deep-brown text-4xl md:text-5xl font-serif font-bold uppercase tracking-wide leading-none mb-8">
-                                Experience
-                            </h2>
-                            <p className="text-deep-brown/70 text-lg leading-relaxed mb-10 font-light max-w-md">
-                                Discover thrilling adventures, cultural tours and serene getaways in Tanzania, Kilimanjaro and Zanzibar. Tailor your journey for unforgettable memories.
-                            </p>
-
-                            {/* Navigation Buttons */}
-                            <div className="flex gap-4">
-                                <button
-                                    onClick={prev}
-                                    className="w-14 h-14 rounded-full border border-deep-brown/30 flex items-center justify-center text-deep-brown hover:bg-deep-brown hover:text-cream transition-colors group"
-                                    aria-label="Previous Experience"
-                                >
-                                    <ArrowLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                </button>
-                                <button
-                                    onClick={next}
-                                    className="w-14 h-14 rounded-full bg-deep-brown/90 flex items-center justify-center text-cream hover:bg-primary transition-colors group"
-                                    aria-label="Next Experience"
-                                >
-                                    <ArrowRight className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                </button>
-                            </div>
-                        </div>
+                        <div className="w-12 h-[1px] bg-primary" />
+                        <span className="font-[family-name:var(--font-script)] text-primary text-3xl md:text-4xl">
+                            Tailored for you
+                        </span>
+                        <div className="w-12 h-[1px] bg-primary" />
                     </motion.div>
+                    
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        className="text-4xl md:text-5xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.1] mb-8"
+                    >
+                        Choose your <br className="hidden md:block"/> <span className="text-white">Experience</span>
+                    </motion.h2>
+                    
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-white/70 text-lg leading-relaxed font-light mx-auto"
+                    >
+                        Discover thrilling adventures, cultural tours and serene getaways in Tanzania, Kilimanjaro and Zanzibar. Tailor your journey for unforgettable memories.
+                    </motion.p>
+                </div>
 
-                    {/* Right Column: Interactive Carousel */}
-                    <div className="lg:w-2/3 w-full relative">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <AnimatePresence mode="popLayout">
-                                {getVisibleSlides().map((exp, idx) => (
-                                    <Link
-                                        key={`${exp.id}-${current + idx}`}
-                                        href={
-                                            exp.id === "safaris" ? "/safari/luxury" :
-                                                exp.id === "migration" ? "/safari/migration" :
-                                                    exp.id === "beach" ? "/destinations/zanzibar" :
-                                                        exp.id === "trekking" ? "/kilimanjaro" : "#"
-                                        }
-                                        className="relative h-[450px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl block"
-                                    >
-                                        <motion.div
-                                            initial={{ opacity: 0, x: 100 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -100 }}
-                                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                            className="h-full w-full relative"
-                                        >
-                                            <div
-                                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                                                style={{ backgroundImage: `url(${exp.image})` }}
-                                            ></div>
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-
-                                            <div className="absolute bottom-0 left-0 w-full p-6 text-center">
-                                                <h3 className="text-cream text-xl font-bold uppercase tracking-widest font-serif mb-2 border-b-2 border-primary/0 group-hover:border-primary inline-block pb-1 transition-all">
-                                                    {exp.title}
-                                                </h3>
-                                            </div>
-                                        </motion.div>
-                                    </Link>
-                                ))}
-                            </AnimatePresence>
-                        </div>
-                    </div>
-
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {experiences.map((exp, idx) => (
+                        <motion.div
+                            key={exp.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: idx * 0.15 }}
+                        >
+                            <Link
+                                href={
+                                    exp.id === "safaris" ? "/safari/luxury" :
+                                        exp.id === "migration" ? "/safari/migration" :
+                                            exp.id === "beach" ? "/destinations/zanzibar" :
+                                                exp.id === "trekking" ? "/kilimanjaro" : "#"
+                                }
+                                className="group block h-[500px] relative rounded-2xl overflow-hidden cursor-pointer"
+                            >
+                                <Image
+                                    src={exp.image}
+                                    alt={exp.title}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                    className="object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                                />
+                                
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-deep-brown/90 via-deep-brown/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                                
+                                <div className="absolute inset-0 p-8 flex flex-col justify-end items-start border border-white/0 group-hover:border-white/10 rounded-2xl transition-colors duration-500">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mb-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                                        <ArrowUpRight className="w-5 h-5 text-primary" />
+                                    </div>
+                                    <h3 className="text-3xl font-serif font-black text-white tracking-wide mb-3 transform transition-transform duration-500 group-hover:-translate-y-2">
+                                        {exp.title}
+                                    </h3>
+                                    <div className="w-0 h-[2px] bg-primary transition-all duration-500 group-hover:w-12" />
+                                </div>
+                            </Link>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>

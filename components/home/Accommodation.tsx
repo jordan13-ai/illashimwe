@@ -1,77 +1,99 @@
+"use client";
+
 import { ACCOMMODATIONS } from "@/data/accommodations";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Accommodation() {
     return (
-        <section className="bg-cream py-24 px-6 md:px-12 text-deep-brown">
-            <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
-                    <span className="text-safari-green font-bold tracking-widest uppercase text-sm mb-4 block">
-                        Rest in Comfort
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-serif font-black mb-6">
-                        Hand-Picked Lodges
-                    </h2>
-                    <p className="text-deep-brown/70 max-w-2xl mx-auto text-lg leading-relaxed">
-                        We have curated a selection of the finest accommodations, from luxury tented camps to heritage lodges, ensuring your nights are as magical as your days.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    {ACCOMMODATIONS.slice(0, 3).map((lodge) => (
-                        <Link href={`/accommodations/${lodge.slug}`} key={lodge.id} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 block">
-                            <div className="relative aspect-[4/3] overflow-hidden">
-                                <Image
-                                    src={lodge.image}
-                                    alt={lodge.name}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-deep-brown shadow-sm">
-                                    {lodge.priceRange}
-                                </div>
-                            </div>
-
-                            <div className="p-8">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div>
-                                        <h3 className="text-xl font-serif font-bold text-deep-brown mb-1 group-hover:text-safari-green transition-colors">
-                                            {lodge.name}
-                                        </h3>
-                                        <p className="text-sm text-gray-500 font-medium">
-                                            {lodge.location}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center bg-safari-green/10 px-2 py-1 rounded text-safari-green font-bold text-sm">
-                                        ★ {lodge.rating}
-                                    </div>
-                                </div>
-
-                                <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed text-sm">
-                                    {lodge.description}
-                                </p>
-
-                                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
-                                    {lodge.features.slice(0, 3).map((feature, idx) => (
-                                        <span key={idx} className="text-[10px] font-bold uppercase tracking-wider bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                            {feature}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-
-                <div className="text-center">
-                    <Link
-                        href="/accommodations"
-                        className="inline-block bg-safari-green text-white font-bold py-4 px-10 rounded-full hover:bg-safari-green/90 transition-all transform hover:scale-105 shadow-lg shadow-safari-green/20"
+        <section className="bg-white py-32 px-6 md:px-12 text-deep-brown">
+            <div className="max-w-[1400px] mx-auto">
+                <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-2xl"
                     >
-                        View All Accommodations
-                    </Link>
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="w-12 h-[1px] bg-primary" />
+                            <p className="font-[family-name:var(--font-script)] text-primary text-4xl lg:text-5xl">
+                                Rest in Comfort
+                            </p>
+                        </div>
+                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight text-deep-brown leading-none mb-6">
+                            Hand-Picked <br /> Lodges
+                        </h2>
+                        <p className="text-gray-500 text-lg leading-relaxed font-light">
+                            We have curated a selection of the finest accommodations, from luxury tented camps to heritage lodges, ensuring your nights are as magical as your days.
+                        </p>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        <Link href="/accommodations" className="group flex items-center justify-center gap-3 bg-transparent border border-gray-200 text-deep-brown px-8 py-4 rounded-full font-bold transition-all uppercase tracking-widest text-sm hover:border-primary hover:text-primary transform hover:-translate-y-1">
+                            All Accommodations <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </Link>
+                    </motion.div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    {ACCOMMODATIONS.slice(0, 3).map((lodge, index) => (
+                        <motion.div
+                            key={lodge.id}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.6, delay: index * 0.15 }}
+                        >
+                            <Link href={`/accommodations/${lodge.slug}`} className="group block">
+                                <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-8 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                                    <Image
+                                        src={lodge.image}
+                                        alt={lodge.name}
+                                        fill
+                                        className="object-cover transition-transform duration-[2s] group-hover:scale-105"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    
+                                    <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-bold text-deep-brown tracking-[0.2em] uppercase shadow-sm">
+                                        {lodge.priceRange}
+                                    </div>
+                                    
+                                    <div className="absolute bottom-6 right-6 w-12 h-12 bg-white rounded-full flex items-center justify-center translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-lg text-primary">
+                                        <ArrowUpRight className="w-5 h-5" />
+                                    </div>
+                                </div>
+
+                                <div className="px-2">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <div>
+                                            <p className="text-primary font-bold text-[10px] uppercase tracking-[0.2em] mb-2">{lodge.location}</p>
+                                            <h3 className="text-3xl font-serif font-bold text-deep-brown group-hover:text-primary transition-colors duration-300 leading-tight">
+                                                {lodge.name}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2 mt-4">
+                                        {lodge.features.slice(0, 2).map((feature, idx) => (
+                                            <span key={idx} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-gray-100 px-3 py-1 rounded-full">
+                                                {feature}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </Link>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>

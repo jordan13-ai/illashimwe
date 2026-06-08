@@ -12,16 +12,10 @@ const backgrounds = [
 ];
 
 const topics = [
-    "Experiences",
-    "Big 5 Safari",
-    "Great Migration",
-    "Mt. Kilimanjaro",
-    "Zanzibar Beach",
-    "Serengeti Tours",
-    "Ngorongoro Tours",
-    "Lake Manyara Tours",
-    "Tarangire Tours",
-    "Photographic Safari"
+    "The Great Migration",
+    "Untamed Wilderness",
+    "Serengeti Horizons",
+    "Zanzibar Escapes"
 ];
 
 export default function Hero() {
@@ -29,72 +23,119 @@ export default function Hero() {
     const [currentTopic, setCurrentTopic] = useState(0);
     const [isQuizOpen, setIsQuizOpen] = useState(false);
 
-    // Cycle backgrounds every 8 seconds
     useEffect(() => {
         const bgInterval = setInterval(() => {
             setCurrentBg((prev) => (prev + 1) % backgrounds.length);
-        }, 8000);
+        }, 6000);
         return () => clearInterval(bgInterval);
     }, []);
 
-    // Cycle topics every 3 seconds
     useEffect(() => {
         const topicInterval = setInterval(() => {
             setCurrentTopic((prev) => (prev + 1) % topics.length);
-        }, 3000);
+        }, 6000);
         return () => clearInterval(topicInterval);
     }, []);
 
     return (
-        <section className="relative h-[85vh] w-full overflow-hidden bg-black">
-            {/* Background Slideshow with Ken Burns Effect */}
+        <section className="relative h-screen min-h-[700px] w-full overflow-hidden bg-black flex items-center justify-center">
+            {/* Background Slideshow */}
             <AnimatePresence mode="popLayout">
                 <motion.div
                     key={currentBg}
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 2, ease: "easeInOut" }}
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{
-                        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url("${backgrounds[currentBg]}")`
-                    }}
-                />
+                    className="absolute inset-0 z-0"
+                >
+                    <motion.div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        animate={{ scale: 1.1 }}
+                        transition={{ duration: 15, ease: "linear" }}
+                        style={{
+                            backgroundImage: `url("${backgrounds[currentBg]}")`
+                        }}
+                    />
+                </motion.div>
             </AnimatePresence>
 
-            <div className="relative h-full flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto z-10">
-                <h1 className="text-cream text-5xl md:text-7xl font-serif font-bold leading-tight mb-6 tracking-wide drop-shadow-2xl">
-                    <span className="block text-4xl md:text-5xl font-[family-name:var(--font-script)] mb-4 normal-case tracking-normal text-cream/90 font-normal">
-                        Discover
+            {/* Dark Overlay for Text Legibility */}
+            <div className="absolute inset-0 z-10 bg-black/40" />
+
+            <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center mt-20">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    className="flex justify-center items-center gap-4 mb-6"
+                >
+                    <div className="w-16 h-[1px] bg-primary" />
+                    <span className="font-[family-name:var(--font-script)] text-primary text-3xl md:text-4xl tracking-widest">
+                        Curated Expeditions
                     </span>
+                    <div className="w-16 h-[1px] bg-primary" />
+                </motion.div>
+                
+                <div className="h-[120px] md:h-[160px] flex items-center justify-center mb-6">
                     <AnimatePresence mode="wait">
-                        <motion.span
+                        <motion.h1
                             key={currentTopic}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.5 }}
-                            className="block text-primary"
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-white text-5xl md:text-7xl lg:text-8xl font-serif font-black uppercase tracking-widest drop-shadow-lg"
                         >
                             {topics[currentTopic]}
-                        </motion.span>
+                        </motion.h1>
                     </AnimatePresence>
-                </h1>
-                <p className="text-cream/90 text-lg md:text-xl max-w-2xl mb-10 font-light drop-shadow-md">
-                    Experience the untamed beauty of the Serengeti with bespoke itineraries designed for the discerning traveler.
-                </p>
-                <div className="flex flex-wrap justify-center gap-6 mt-4">
+                </div>
+                
+                <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.8 }}
+                    className="text-cream/90 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed tracking-wide"
+                >
+                    Experience the raw beauty of Tanzania with bespoke itineraries designed for the discerning traveler.
+                </motion.p>
+                
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 1 }}
+                    className="flex flex-col sm:flex-row justify-center items-center gap-6"
+                >
                     <button
                         onClick={() => setIsQuizOpen(true)}
-                        className="bg-primary hover:bg-primary/90 hover:-translate-y-1 transition-all text-white px-10 py-4 rounded-full font-bold text-lg tracking-wide shadow-xl focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                        className="bg-primary text-deep-brown hover:bg-white px-12 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1 w-full sm:w-auto"
                     >
-                        Plan Your Journey
+                        Design Your Journey
                     </button>
-                    <button className="border border-cream/50 text-cream hover:bg-cream/10 hover:-translate-y-1 px-10 py-4 rounded-full font-bold text-lg transition-all tracking-wide focus:ring-2 focus:ring-offset-2 focus:ring-cream backdrop-blur-sm">
-                        Explore Safaris
+                    <button className="text-white px-12 py-4 rounded-full font-bold uppercase tracking-widest text-sm border border-white/50 hover:bg-white hover:text-deep-brown transition-all backdrop-blur-sm w-full sm:w-auto">
+                        View Safaris
                     </button>
-                </div>
+                </motion.div>
             </div>
+            
+            {/* Scroll Indicator */}
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 2 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+            >
+                <span className="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
+                <div className="w-[1px] h-12 bg-white/30 overflow-hidden relative">
+                    <motion.div 
+                        animate={{ y: [0, 48] }}
+                        transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                        className="w-full h-1/2 bg-white absolute top-0"
+                    />
+                </div>
+            </motion.div>
+            
             <SafariQuiz isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
         </section>
     );

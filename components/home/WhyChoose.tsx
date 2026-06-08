@@ -6,71 +6,73 @@ import { motion } from "framer-motion";
 
 export default function WhyChoose() {
     return (
-        <section className="relative py-24 px-6 md:px-0 bg-deep-brown text-cream overflow-hidden">
-            {/* Texture Background */}
-            <div
-                className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay"
-                style={{ backgroundImage: "url('/why_choose_bg_texture_1768492250010.webp')", backgroundSize: "cover" }}
-            ></div>
-
-            <div className="container mx-auto max-w-7xl relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+        <section className="relative py-32 px-6 md:px-12 bg-[#FDFCF8] text-deep-brown overflow-hidden">
+            <div className="container mx-auto max-w-[1400px] relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
                     {/* Left Col: Sticky image or main visual */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
+                        initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8 }}
-                        className="lg:w-1/3 relative"
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="lg:w-5/12 relative w-full"
                     >
-                        <div className="relative rounded-2xl overflow-hidden shadow-2xl skew-x-1 border-4 border-white/5">
+                        <div className="relative rounded-[2rem] overflow-hidden shadow-2xl h-[600px] lg:h-[750px] w-full">
                             <Image
                                 src="/safari_guide_portrait_1768492265746.webp"
                                 alt="Expert Guide"
-                                width={600}
-                                height={800}
-                                className="w-full h-auto object-cover"
+                                fill
+                                sizes="(max-width: 1024px) 100vw, 40vw"
+                                className="object-cover hover:scale-105 transition-transform duration-[2s]"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-deep-brown/80 to-transparent"></div>
-                            <div className="absolute bottom-8 left-8">
-                                <p className="font-[family-name:var(--font-script)] text-primary text-4xl mb-2">Authentic</p>
-                                <h3 className="text-3xl font-bold uppercase tracking-tight">Connections</h3>
+                            {/* Gradient for text legibility */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-deep-brown/80 via-transparent to-transparent"></div>
+                            
+                            <div className="absolute bottom-10 left-10 right-10">
+                                <p className="font-[family-name:var(--font-script)] text-primary text-4xl lg:text-5xl mb-2 drop-shadow-md">Authentic</p>
+                                <h3 className="text-4xl font-serif font-bold text-white tracking-wide">Connections</h3>
                             </div>
                         </div>
                         {/* Decorative element */}
-                        <div className="absolute -z-10 -bottom-10 -right-10 w-full h-full border-2 border-primary/30 rounded-2xl translate-x-4 translate-y-4"></div>
+                        <div className="absolute -z-10 -top-8 -left-8 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                        <div className="absolute -z-10 -bottom-8 -right-8 w-64 h-64 bg-deep-brown/5 rounded-full blur-3xl"></div>
                     </motion.div>
 
                     {/* Right Col: Grid of features */}
-                    <div className="lg:w-2/3">
+                    <div className="lg:w-7/12">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
-                            className="mb-12"
+                            transition={{ duration: 0.8 }}
+                            className="mb-16"
                         >
-                            <p className="font-[family-name:var(--font-script)] text-primary text-5xl mb-2">The Illashimwe</p>
-                            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight font-molot text-cream">Difference</h2>
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="w-12 h-[1px] bg-primary" />
+                                <p className="font-[family-name:var(--font-script)] text-primary text-4xl lg:text-5xl">The Illashimwe</p>
+                            </div>
+                            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight text-deep-brown leading-none">
+                                Difference
+                            </h2>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                             {whyChooseItems.map((item, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-50px" }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="flex gap-6 p-6 rounded-xl hover:bg-white/5 transition-colors group cursor-pointer border border-white/5 hover:border-primary/20"
+                                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                                    className="group cursor-default"
                                 >
-                                    <div className="shrink-0 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                                        <span className="material-symbols-outlined text-3xl text-primary group-hover:text-deep-brown">{item.icon}</span>
+                                    <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-deep-brown/5 text-deep-brown group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm">
+                                        <span className="material-symbols-outlined text-3xl">{item.icon}</span>
                                     </div>
                                     <div>
-                                        <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-2 text-cream group-hover:text-primary transition-colors">{item.title}</h3>
-                                        <p className="text-cream/60 leading-relaxed group-hover:text-cream/80 transition-colors text-base">{item.description}</p>
+                                        <h3 className="text-2xl font-serif font-bold mb-4 text-deep-brown group-hover:text-primary transition-colors duration-300">{item.title}</h3>
+                                        <p className="text-gray-500 leading-relaxed font-light text-lg">{item.description}</p>
                                     </div>
                                 </motion.div>
                             ))}
