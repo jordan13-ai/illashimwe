@@ -60,8 +60,8 @@ export default function Experiences() {
                         >
                             <Link
                                 href={
-                                    exp.id === "safaris" ? "/safari/luxury" :
-                                        exp.id === "migration" ? "/safari/migration" :
+                                    exp.id === "safaris" ? "/safari" :
+                                        exp.id === "migration" ? "/destinations/serengeti" :
                                             exp.id === "beach" ? "/destinations/zanzibar" :
                                                 exp.id === "trekking" ? "/kilimanjaro" : "#"
                                 }

@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ALL_DESTINATIONS } from "@/data/destinations";
+import { SAFARI_PACKAGES } from "@/data/safari";
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -137,18 +138,132 @@ export default async function DestinationPage({ params }: PageProps) {
                         </div>
                     )}
                 </div>
-
-                {/* CTA */}
-                <div className="mt-16 p-8 bg-white rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <h2 className="font-molot text-3xl text-deep-brown mb-4">Ready to go?</h2>
-                    <p className="text-gray-600 mb-8">Start planning your trip to {dest.title} today.</p>
-                    <Link href="/plan-trip">
-                        <Button className="bg-primary hover:bg-primary/90 text-deep-brown font-bold text-lg px-8 h-12 rounded-full">
-                            Plan My Trip <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                    </Link>
-                </div>
             </div>
+
+            {/* Related Itineraries */}
+            {(() => {
+                const destinationPackages = SAFARI_PACKAGES.filter(pkg => 
+                    pkg.title.toLowerCase().includes(dest.slug.toLowerCase()) || 
+                    pkg.title.toLowerCase().includes(dest.title.toLowerCase()) ||
+                    pkg.description.toLowerCase().includes(dest.title.toLowerCase()) || 
+                    pkg.overview.toLowerCase().includes(dest.title.toLowerCase()) ||
+                    pkg.itinerary.some(day => day.title.toLowerCase().includes(dest.title.toLowerCase()) || day.description.toLowerCase().includes(dest.title.toLowerCase()))
+                );
+
+                if (destinationPackages.length === 0) return null;
+
+                return (
+                    <section className="bg-[#FDFCF8] py-24 px-6 border-t border-gray-100">
+                        <div className="max-w-[1400px] mx-auto">
+                            <div className="flex flex-col items-center mb-16 text-center">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="w-12 h-[1px] bg-primary" />
+                                    <p className="font-[family-name:var(--font-script)] text-primary text-3xl md:text-4xl">
+                                        Continue Exploring
+                                    </p>
+                                    <div className="w-12 h-[1px] bg-primary" />
+                                </div>
+                                <h2 className="text-4xl md:text-5xl font-serif font-black uppercase tracking-tight text-deep-brown">
+                                    {dest.title} Itineraries
+                                </h2>
+                            </div>
+
+                            <div className="relative w-full">
+                                <style dangerouslySetInnerHTML={{ __html: `
+                                    .hide-scrollbar::-webkit-scrollbar { display: none; }
+                                    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                                `}} />
+                                <div className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 hide-scrollbar px-4 md:px-8">
+                                    {destinationPackages.slice(0, 6).map((pkg) => (
+                                        <Link href={`/safari/packages/${pkg.slug}`} key={pkg.slug} className="group flex flex-col bg-white rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden border border-gray-100 min-w-[85vw] md:min-w-[420px] max-w-[420px] snap-start shrink-0">
+                                            {/* Image Section */}
+                                            <div className="relative h-[300px] w-full overflow-hidden">
+                                                <Image
+                                                    src={pkg.image}
+                                                    alt={pkg.title}
+                                                    fill
+                                                    className="object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                />
+                                                
+                                                {/* Tags */}
+                                                <div className="absolute top-6 left-6 flex flex-col gap-2">
+                                                    {pkg.tag && (
+                                                        <span className="bg-primary text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                                            {pkg.tag}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <div className="absolute top-6 right-6">
+                                                    <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl shadow-sm border border-white">
+                                                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-0.5 text-right">From</p>
+                                                        <p className="font-serif font-black text-lg text-deep-brown">{pkg.price}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Content Section */}
+                                            <div className="p-8 md:p-10 flex flex-col flex-grow">
+                                                <div className="flex items-center gap-6 mb-6">
+                                                    <div className="flex items-center gap-2 text-gray-500">
+                                                        <Clock className="w-4 h-4 text-primary" />
+                                                        <span className="text-xs font-bold uppercase tracking-widest">{pkg.duration}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-gray-500">
+                                                        <MapPin className="w-4 h-4 text-primary" />
+                                                        <span className="text-xs font-bold uppercase tracking-widest">Tanzania</span>
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="text-2xl md:text-3xl font-serif font-bold text-deep-brown group-hover:text-primary transition-colors duration-300 leading-tight mb-4">
+                                                    {pkg.title}
+                                                </h3>
+                                                
+                                                <p className="text-gray-500 leading-relaxed font-light mb-8 flex-grow">
+                                                    {pkg.description}
+                                                </p>
+
+                                                <div className="pt-6 border-t border-gray-100 flex justify-between items-center">
+                                                    <span className="text-xs font-bold text-deep-brown uppercase tracking-[0.2em] group-hover:text-primary transition-colors flex items-center gap-2">
+                                                        View Itinerary
+                                                        <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                                                    </span>
+                                                    <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all duration-300 text-gray-400">
+                                                        <ArrowRight className="w-4 h-4" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                );
+            })()}
+
+            {/* CTA */}
+            <section className="py-24 bg-[#F5F5F0]">
+                <div className="max-w-4xl mx-auto px-6">
+                    <div className="p-12 md:p-16 bg-white rounded-[3rem] shadow-xl border border-gray-100 text-center relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-20 -mt-20" />
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -ml-20 -mb-20" />
+                        <div className="relative z-10">
+                            <h2 className="font-serif font-black text-4xl md:text-5xl uppercase tracking-tight text-deep-brown mb-6">
+                                Ready to go?
+                            </h2>
+                            <p className="text-gray-500 text-lg mb-10 max-w-lg mx-auto font-light leading-relaxed">
+                                Start planning your trip to {dest.title} today. Let our experts craft the perfect bespoke journey for you.
+                            </p>
+                            <Link href="/plan-trip">
+                                <Button className="bg-deep-brown hover:bg-primary text-white font-bold text-sm uppercase tracking-widest px-10 h-14 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                                    Plan My Trip <ArrowRight className="ml-3 w-4 h-4" />
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
