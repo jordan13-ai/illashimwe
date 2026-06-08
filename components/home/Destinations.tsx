@@ -1,50 +1,87 @@
 import { destinations } from "@/data/homepage";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import React from "react";
 
 export default function Destinations() {
     return (
-        <section className="bg-deep-brown py-24 px-6 text-cream">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-center mb-16">
-                    <div className="mb-8 md:mb-0 text-center md:text-left">
-                        <p className="font-[family-name:var(--font-script)] text-primary text-5xl md:text-6xl mb-0 pl-1 drop-shadow-sm">
-                            Explore our
-                        </p>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold uppercase tracking-wide leading-none mb-6 text-cream">
-                            Untamed Destinations
-                        </h2>
-                        <p className="text-cream/80 text-lg font-light max-w-lg leading-relaxed">
-                            Tanzania&apos;s most iconic landscapes, curated for your ultimate discovery.
-                        </p>
-                    </div>
-                    <Link href="/destinations" className="border border-cream/30 hover:bg-cream/10 text-cream px-8 py-3 rounded-full font-bold transition-all uppercase tracking-widest text-sm focus:ring-2 focus:ring-offset-2 focus:ring-cream inline-block backdrop-blur-sm shadow-md hover:-translate-y-1">
-                        View Map
+        <section className="bg-[#FDFCF8] py-28 relative overflow-hidden border-y border-gray-100">
+            {/* Header Area */}
+            <div className="max-w-[1400px] mx-auto px-6 mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8">
+                <div className="max-w-2xl">
+                    <p className="font-[family-name:var(--font-script)] text-primary text-4xl lg:text-5xl mb-4">
+                        Explore our
+                    </p>
+                    <h2 className="text-5xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.1] text-deep-brown">
+                        Untamed <br /> Destinations
+                    </h2>
+                </div>
+                <div className="flex flex-col items-start md:items-end gap-6 max-w-sm">
+                    <p className="text-gray-500 text-lg font-light leading-relaxed md:text-right">
+                        Tanzania's most iconic landscapes, curated for your ultimate African discovery. Swipe to explore.
+                    </p>
+                    <Link href="/destinations" className="group flex items-center gap-3 text-deep-brown font-bold uppercase tracking-widest text-sm hover:text-primary transition-colors">
+                        View All Destinations <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </Link>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    {destinations.map((dest, index) => (
-                        <Link
-                            href={`/destinations/${dest.slug}`}
-                            key={index}
-                            className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-cream/50 block shadow-xl transition-shadow hover:shadow-2xl"
-                            tabIndex={0}
-                        >
-                            <div
-                                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
-                                style={{ backgroundImage: `url('${dest.image}')` }}
-                            ></div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-deep-brown via-deep-brown/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            <div className="absolute bottom-6 left-6 right-6">
-                                <span className="backdrop-blur-md bg-white/20 border border-white/30 text-white text-[10px] font-bold uppercase tracking-[2px] px-3 py-1 rounded-full mb-3 inline-block shadow-sm">
+            </div>
+
+            {/* Horizontal Scroll Track */}
+            <div className="w-full pb-16 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-6 md:px-12 flex gap-6 md:gap-10">
+                {destinations.map((dest, index) => (
+                    <Link
+                        href={`/destinations/${dest.slug}`}
+                        key={index}
+                        className="group relative shrink-0 w-[85vw] md:w-[320px] lg:w-[280px] xl:w-[320px] h-[450px] md:h-[480px] rounded-[2rem] overflow-hidden snap-center md:snap-start block"
+                    >
+                        {/* Image */}
+                        <Image
+                            src={dest.image}
+                            alt={dest.title}
+                            fill
+                            sizes="(max-width: 768px) 85vw, 320px"
+                            className="object-cover transition-transform duration-[2s] group-hover:scale-110"
+                        />
+                        
+                        {/* Elegant Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-deep-brown/90 via-deep-brown/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
+                        
+                        {/* Inner Border Overlay */}
+                        <div className="absolute inset-4 rounded-[1.5rem] border border-white/0 group-hover:border-white/30 scale-[0.95] group-hover:scale-100 transition-all duration-700 pointer-events-none" />
+
+                        {/* Content */}
+                        <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                            <div className="flex items-center gap-4 mb-4 transform translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-out">
+                                <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] border-b border-primary text-primary pb-1">
                                     {dest.tag}
                                 </span>
-                                <h3 className="text-2xl font-serif font-bold group-hover:text-cream transition-colors duration-300">{dest.title}</h3>
                             </div>
-                        </Link>
-                    ))}
-                </div>
+                            <div className="flex items-end justify-between transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                                <h3 className="text-3xl md:text-4xl font-serif font-black text-white tracking-wide group-hover:text-primary transition-colors duration-500 drop-shadow-md">
+                                    {dest.title}
+                                </h3>
+                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-deep-brown flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-500 shadow-2xl shrink-0 ml-3">
+                                    <ArrowUpRight className="w-5 h-5" />
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
+                {/* End spacer so the last item isn't flush with the right edge */}
+                <div className="shrink-0 w-6 md:w-[10vw]" />
             </div>
+            
+            {/* Custom scrollbar styling */}
+            <style dangerouslySetInnerHTML={{__html: `
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}} />
         </section>
     );
 }
