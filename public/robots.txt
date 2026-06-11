@@ -10,4 +10,4 @@ Disallow: /__next*
 Disallow: /faqs/
 Disallow: /faqs
 
-Sitemap: https://illashimwe.com/sitemap.xml
+Sitemap: https://illashimweadventures.com/sitemap.xml

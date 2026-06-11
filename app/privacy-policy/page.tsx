@@ -41,7 +41,7 @@ export default function PrivacyPage() {
 
             <h3>Contact Us</h3>
             <p>
-                If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:info@illashimwe.com" className="text-primary hover:underline">info@illashimwe.com</a>.
+                If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:info@illashimweadventures.com" className="text-primary hover:underline">info@illashimweadventures.com</a>.
             </p>
         </ResourcePageLayout>
     );

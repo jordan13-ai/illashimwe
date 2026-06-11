@@ -31,7 +31,7 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
-const SITE_URL = "https://illashimwe.com";
+const SITE_URL = "https://illashimweadventures.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -130,7 +130,7 @@ export default function RootLayout({
               logo: `${SITE_URL}/logo/illashimwe logo.webp`,
               image: `${SITE_URL}/hero_serengeti_migration_1768491216654.webp`,
               telephone: "+255755310533",
-              email: "info@illashimwe.com",
+              email: "info@illashimweadventures.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Main St",

@@ -107,7 +107,7 @@ export default function Footer() {
                                 </li>
                                 <li className="flex items-center gap-3">
                                     <span className="material-symbols-outlined text-safari-green text-lg shrink-0">mail</span>
-                                    <Link href="mailto:info@illashimwe.com" className="hover:text-white transition-colors break-all">info@illashimwe.com</Link>
+                                    <Link href="mailto:info@illashimweadventures.com" className="hover:text-white transition-colors break-all">info@illashimweadventures.com</Link>
                                 </li>
                             </ul>
 

@@ -42,8 +42,8 @@ export default function ContactPage() {
                             </div>
                             <h3 className="font-molot text-xl text-deep-brown mb-2">Email Us</h3>
                             <p className="text-gray-600 mb-4 text-sm">We&apos;ll get back to you within 24 hours.</p>
-                            <a href="mailto:info@illashimwe.com" className="text-lg font-bold text-deep-brown hover:text-primary transition-colors block">
-                                info@illashimwe.com
+                            <a href="mailto:info@illashimweadventures.com" className="text-lg font-bold text-deep-brown hover:text-primary transition-colors block">
+                                info@illashimweadventures.com
                             </a>
                         </div>
 

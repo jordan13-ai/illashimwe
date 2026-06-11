@@ -9,7 +9,7 @@ import { SAFARI_PACKAGES } from "@/data/safari";
 import { SAFARI_CATEGORIES } from "@/data/safari-categories";
 import { KILI_ROUTES, KILI_PACKAGES } from "@/data/kilimanjaro";
 
-const BASE_URL = "https://illashimwe.com";
+const BASE_URL = "https://illashimweadventures.com";
 
 type ChangeFreq =
   | "always"
