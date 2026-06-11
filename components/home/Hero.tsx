@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
-import SafariQuiz from "./SafariQuiz";
+
+const SafariQuiz = dynamic(() => import("./SafariQuiz"), { ssr: false });
 
 const backgrounds = [
     "/images/lioness-at-the-serengeti-national-park-tanzania-2026-01-05-04-42-12-utc.webp",

@@ -1,27 +1,16 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function BrandQuote() {
     return (
         <section className="bg-deep-brown py-32 px-6 overflow-hidden text-cream relative">
-            {/* Background Pattern */}
             <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
 
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-center relative z-10">
 
                 {/* Image Side */}
-                <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1 }}
-                    className="relative h-[650px] lg:h-[750px] w-full max-w-md mx-auto lg:max-w-none rounded-t-[300px] rounded-b-[30px] overflow-hidden order-2 lg:order-1 transform transition-transform duration-700 group"
-                >
+                <div className="relative h-[650px] lg:h-[750px] w-full max-w-md mx-auto lg:max-w-none rounded-t-[300px] rounded-b-[30px] overflow-hidden order-2 lg:order-1 transform transition-transform duration-700 group anim-fade-left">
                     <Image
                         src="/brand_quote_camp.webp"
                         alt="The Illashimwe Legacy - Mobile Camp"
@@ -30,16 +19,10 @@ export default function BrandQuote() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 transition-opacity duration-700"></div>
                     <div className="absolute inset-4 rounded-t-[280px] rounded-b-[15px] border border-white/20 scale-[0.98] group-hover:scale-100 transition-all duration-700 pointer-events-none" />
-                </motion.div>
+                </div>
 
                 {/* Content Side */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1 }}
-                    className="order-1 lg:order-2 text-center lg:text-left"
-                >
+                <div className="order-1 lg:order-2 text-center lg:text-left anim-fade-up anim-delay-2">
                     <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
                         <div className="w-12 h-[1px] bg-primary hidden lg:block" />
                         <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase">
@@ -74,7 +57,7 @@ export default function BrandQuote() {
                             </Link>
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

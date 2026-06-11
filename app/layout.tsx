@@ -112,8 +112,12 @@ export default function RootLayout({
       className={`${molot.variable} ${notoSerif.variable} ${notoSans.variable} ${greatVibes.variable}`}
     >
       <head>
+        {/* Preconnect to Google Fonts to eliminate connection latency */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* display=optional: brief blocking period only, uses fallback if font is slow — best for icon fonts */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=optional"
           rel="stylesheet"
         />
         {/* JSON-LD: Local Business structured data */}
