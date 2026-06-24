@@ -104,8 +104,8 @@ export default function AboutPage() {
                             </div>
                             <div className="w-[1px] h-12 bg-gray-200" />
                             <div>
-                                <p className="font-molot text-4xl text-deep-brown">10+</p>
-                                <p className="text-xs text-primary font-bold uppercase tracking-widest mt-1">Years of Excellence</p>
+                                <p className="font-molot text-4xl text-deep-brown">Private</p>
+                                <p className="text-xs text-primary font-bold uppercase tracking-widest mt-1">Tailor-Made Only</p>
                             </div>
                             <div className="w-[1px] h-12 bg-gray-200" />
                             <div>
@@ -352,7 +352,7 @@ export default function AboutPage() {
                 <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
                     {[
                         { stat: "100%", label: "Locally Owned & Operated" },
-                        { stat: "10+", label: "Years of Excellence" },
+                        { stat: "100%", label: "Tailor-Made Private Trips" },
                         { stat: "500+", label: "Private Safaris Crafted" },
                         { stat: "5★", label: "Average Guest Rating" },
                     ].map((s, i) => (

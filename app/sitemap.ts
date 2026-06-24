@@ -73,9 +73,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url("/faq/", 0.65, "monthly"),
     url("/testimonials/", 0.6, "monthly"),
 
-    // Legal
-    url("/privacy-policy/", 0.3, "yearly"),
-    url("/terms/", 0.3, "yearly"),
 
     // Dynamic: accommodations
     ...ACCOMMODATIONS.map((a) => url(`/accommodations/${a.slug}/`, 0.75)),

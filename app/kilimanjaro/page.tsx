@@ -94,7 +94,7 @@ export default function KilimanjaroLandingPage() {
                 <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
                     {[
                         { label: "Success Rate", value: "98%", icon: Trophy, color: "text-amber-500" },
-                        { label: "Expert Guides", value: "10+ Years", icon: Mountain, color: "text-green-600" },
+                        { label: "Expert Guides", value: "WFR Certified", icon: Mountain, color: "text-green-600" },
                         { label: "Safety Record", value: "100%", icon: ShieldCheck, color: "text-blue-500" },
                         { label: "Happy Climbers", value: "5,000+", icon: Calendar, color: "text-purple-500" }
                     ].map((stat, idx) => (
