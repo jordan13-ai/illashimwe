@@ -7,8 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle2, Loader2 } from "lucide-react";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_PLAN_TRIP_ID";
-
 export default function PlanTripForm() {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -17,10 +15,9 @@ export default function PlanTripForm() {
         setStatus("loading");
         const data = new FormData(e.currentTarget);
         try {
-            const res = await fetch(FORMSPREE_ENDPOINT, {
+            const res = await fetch("/submit.php", {
                 method: "POST",
                 body: data,
-                headers: { Accept: "application/json" },
             });
             setStatus(res.ok ? "success" : "error");
         } catch {
@@ -42,7 +39,7 @@ export default function PlanTripForm() {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
-            <input type="hidden" name="_subject" value="New Trip Enquiry — Illashimwe Adventure" />
+            <input type="hidden" name="form_type" value="plan-trip" />
 
             {/* Row 1: Names */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

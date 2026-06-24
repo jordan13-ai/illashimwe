@@ -6,8 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, Loader2 } from "lucide-react";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_CONTACT_ID";
-
 export default function ContactForm() {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -16,10 +14,9 @@ export default function ContactForm() {
         setStatus("loading");
         const data = new FormData(e.currentTarget);
         try {
-            const res = await fetch(FORMSPREE_ENDPOINT, {
+            const res = await fetch("/submit.php", {
                 method: "POST",
                 body: data,
-                headers: { Accept: "application/json" },
             });
             setStatus(res.ok ? "success" : "error");
         } catch {
@@ -39,7 +36,7 @@ export default function ContactForm() {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-            <input type="hidden" name="_subject" value="New Contact Message — Illashimwe Adventure" />
+            <input type="hidden" name="form_type" value="contact" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">

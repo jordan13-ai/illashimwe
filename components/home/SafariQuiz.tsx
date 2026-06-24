@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, CheckCircle2, Loader2 } from "lucide-react";
-// Replace YOUR_QUIZ_ID with your Formspree form ID after signing up at formspree.io
-
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_QUIZ_ID";
 
 interface SafariQuizProps {
     isOpen: boolean;
@@ -57,10 +54,10 @@ export default function SafariQuiz({ isOpen, onClose }: SafariQuizProps) {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await fetch(FORMSPREE_ENDPOINT, {
+            await fetch("/submit.php", {
                 method: "POST",
-                headers: { "Content-Type": "application/json", Accept: "application/json" },
-                body: JSON.stringify({ name, email, ...answers }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ form_type: "safari-quiz", name, email, ...answers }),
             });
         } finally {
             setIsLoading(false);
