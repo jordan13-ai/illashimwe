@@ -52,7 +52,7 @@ export default function HowItWorks() {
                 </div>
 
                 {/* Mobile Connector Line */}
-                <div className="md:hidden absolute top-[300px] bottom-[100px] left-1/2 w-[1px] bg-deep-brown/20 -ml-[0.5px] -z-10 dashed-line-vertical"></div>
+                <div className="md:hidden absolute top-32 bottom-24 left-1/2 w-[1px] bg-deep-brown/20 -ml-[0.5px] -z-10 dashed-line-vertical"></div>
             </div>
         </section>
     );

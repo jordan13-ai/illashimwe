@@ -9,7 +9,7 @@ export default function WhyChoose() {
 
                     {/* Left Col: Image */}
                     <div className="lg:w-5/12 relative w-full anim-fade-left">
-                        <div className="relative rounded-[2rem] overflow-hidden shadow-2xl h-[600px] lg:h-[750px] w-full">
+                        <div className="relative rounded-[2rem] overflow-hidden shadow-2xl h-[380px] md:h-[520px] lg:h-[750px] w-full">
                             <Image
                                 src="/safari_guide_portrait_1768492265746.webp"
                                 alt="Expert Guide"
@@ -35,7 +35,7 @@ export default function WhyChoose() {
                                 <div className="w-12 h-[1px] bg-primary" />
                                 <p className="font-[family-name:var(--font-script)] text-primary text-4xl lg:text-5xl">The Illashimwe</p>
                             </div>
-                            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight text-deep-brown leading-none">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black uppercase tracking-tight text-deep-brown leading-none">
                                 Difference
                             </h2>
                         </div>

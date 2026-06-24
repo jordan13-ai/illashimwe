@@ -32,7 +32,7 @@ export default function AboutPage() {
                         <span className="text-primary font-bold tracking-[0.3em] text-[10px] uppercase">Arusha, Tanzania</span>
                         <div className="w-12 h-[1px] bg-primary" />
                     </div>
-                    <h1 className="font-molot text-6xl md:text-8xl lg:text-[110px] text-white tracking-wider leading-none mb-8">
+                    <h1 className="font-molot text-4xl sm:text-6xl md:text-7xl lg:text-[100px] text-white tracking-wider leading-none mb-8">
                         OUR STORY
                     </h1>
                     <p className="text-white/70 text-lg md:text-xl font-light max-w-xl mx-auto leading-relaxed tracking-wide">
@@ -53,8 +53,8 @@ export default function AboutPage() {
             <section className="bg-[#F5F5F0]">
                 <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2">
 
-                    {/* Image column — sticky on scroll */}
-                    <div className="relative h-[60vh] lg:h-auto lg:min-h-[800px] overflow-hidden">
+                    {/* Image column */}
+                    <div className="relative h-[56vw] max-h-[560px] lg:h-auto lg:min-h-[800px] overflow-hidden">
                         <Image
                             src="/brand_quote_camp.webp"
                             alt="Illashimwe Adventure — mobile camp in the bush"
@@ -171,11 +171,12 @@ export default function AboutPage() {
                                 desc: "From itinerary design to in-bush service, our commitment to detail ensures every moment exceeds your expectations.",
                             },
                         ].map((item, idx) => (
-                            <div key={idx} className="group relative h-[560px] rounded-3xl overflow-hidden cursor-default">
+                            <div key={idx} className="group relative h-[320px] md:h-[460px] lg:h-[560px] rounded-3xl overflow-hidden cursor-default">
                                 <Image
                                     src={item.img}
                                     alt={item.title}
                                     fill
+                                    loading="lazy"
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                                     sizes="(max-width: 768px) 100vw, 33vw"
                                 />
@@ -194,11 +195,12 @@ export default function AboutPage() {
             </section>
 
             {/* ── GUIDE PORTRAIT: Full-width immersive ────────────────────────── */}
-            <section className="relative h-[70vh] w-full overflow-hidden">
+            <section className="relative h-[60vw] max-h-[700px] min-h-[400px] w-full overflow-hidden">
                 <Image
                     src="/safari_guide_portrait_1768492265746.webp"
                     alt="Expert Illashimwe guide in the field"
                     fill
+                    loading="lazy"
                     className="object-cover object-top"
                     sizes="100vw"
                 />
@@ -271,55 +273,59 @@ export default function AboutPage() {
                         <span className="text-primary font-bold tracking-[0.25em] text-[10px] uppercase block mb-4">Tanzania Through Our Eyes</span>
                         <h2 className="font-molot text-4xl md:text-5xl text-deep-brown">Life in the Wild</h2>
                     </div>
-                    <div className="grid grid-cols-12 grid-rows-2 gap-4 h-[600px]">
-                        {/* Large left */}
-                        <div className="col-span-12 md:col-span-6 row-span-2 relative rounded-3xl overflow-hidden">
+                    {/* Mobile: 2-col grid with aspect ratios. Desktop: editorial 12-col layout */}
+                    <div className="grid grid-cols-2 lg:grid-cols-12 gap-4">
+                        {/* Large — full width on mobile, left half on desktop (2 rows tall) */}
+                        <div className="col-span-2 lg:col-span-6 relative aspect-[4/3] lg:aspect-auto lg:h-[580px] rounded-3xl overflow-hidden">
                             <Image
                                 src="/images/elephant-herd-seeking-shade-under-an-acacia-tree-i-2026-03-25-05-04-43-utc.webp"
                                 alt="Elephant herd under acacia tree"
                                 fill
+                                loading="lazy"
                                 className="object-cover hover:scale-105 transition-transform duration-700"
-                                sizes="(max-width: 768px) 100vw, 50vw"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
                             />
                         </div>
-                        {/* Top right */}
-                        <div className="col-span-12 md:col-span-3 row-span-1 relative rounded-3xl overflow-hidden">
+                        {/* Top right pair */}
+                        <div className="col-span-1 lg:col-span-3 relative aspect-square lg:aspect-auto lg:h-[282px] rounded-3xl overflow-hidden">
                             <Image
                                 src="/images/african-lionesses-in-the-maasai-mara-national-park-2026-03-26-01-44-51-utc.webp"
                                 alt="African lionesses"
                                 fill
+                                loading="lazy"
                                 className="object-cover hover:scale-105 transition-transform duration-700"
-                                sizes="(max-width: 768px) 100vw, 25vw"
+                                sizes="(max-width: 1024px) 50vw, 25vw"
                             />
                         </div>
-                        {/* Top far right */}
-                        <div className="col-span-12 md:col-span-3 row-span-1 relative rounded-3xl overflow-hidden">
+                        <div className="col-span-1 lg:col-span-3 relative aspect-square lg:aspect-auto lg:h-[282px] rounded-3xl overflow-hidden">
                             <Image
                                 src="/images/aerial-view-of-herd-of-african-elephants-standing-2026-03-25-00-59-53-utc.webp"
                                 alt="Aerial view of elephants"
                                 fill
+                                loading="lazy"
                                 className="object-cover hover:scale-105 transition-transform duration-700"
-                                sizes="(max-width: 768px) 100vw, 25vw"
+                                sizes="(max-width: 1024px) 50vw, 25vw"
                             />
                         </div>
-                        {/* Bottom right */}
-                        <div className="col-span-12 md:col-span-3 row-span-1 relative rounded-3xl overflow-hidden">
+                        {/* Bottom right pair */}
+                        <div className="col-span-1 lg:col-span-3 relative aspect-square lg:aspect-auto lg:h-[282px] rounded-3xl overflow-hidden">
                             <Image
                                 src="/images/beautiful-tropical-beach-with-white-sand-and-clear-2026-03-18-05-44-03-utc.webp"
                                 alt="Zanzibar beach"
                                 fill
+                                loading="lazy"
                                 className="object-cover hover:scale-105 transition-transform duration-700"
-                                sizes="(max-width: 768px) 100vw, 25vw"
+                                sizes="(max-width: 1024px) 50vw, 25vw"
                             />
                         </div>
-                        {/* Bottom far right */}
-                        <div className="col-span-12 md:col-span-3 row-span-1 relative rounded-3xl overflow-hidden">
+                        <div className="col-span-1 lg:col-span-3 relative aspect-square lg:aspect-auto lg:h-[282px] rounded-3xl overflow-hidden">
                             <Image
                                 src="/images/snow-on-top-of-mount-kilimanjaro-in-amboseli-2026-03-24-15-21-46-utc.webp"
                                 alt="Mount Kilimanjaro"
                                 fill
+                                loading="lazy"
                                 className="object-cover hover:scale-105 transition-transform duration-700"
-                                sizes="(max-width: 768px) 100vw, 25vw"
+                                sizes="(max-width: 1024px) 50vw, 25vw"
                             />
                         </div>
                     </div>

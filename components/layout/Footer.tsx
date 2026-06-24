@@ -7,11 +7,12 @@ export default function Footer() {
             {/* Safari Silhouette Top Decoration using SVG for perfect color match */}
             <div className="absolute top-0 left-0 w-full transform -translate-y-[98%] z-10 text-deep-brown overflow-hidden leading-[0]">
                 <svg
-                    className="w-full h-16 md:h-24 lg:h-32 min-w-[1000px] relative left-1/2 -translate-x-1/2"
+                    className="w-full h-16 md:h-24 lg:h-32"
                     viewBox="0 0 1440 320"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="none"
+                    aria-hidden="true"
                 >
                     <path d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
                     {/* Add some "trees" to the silhouette */}
@@ -41,11 +42,11 @@ export default function Footer() {
                                 Your trusted partner for authentic Tanzanian adventures. Creating memories through safe, sustainable, and spectacular travel.
                             </p>
                             <div className="flex gap-3">
-                                <Link href="https://www.facebook.com/illashimweadventure" target="_blank" className="border border-cream/20 rounded-full p-2 hover:border-safari-green hover:text-safari-green transition-all">
-                                    <span className="material-symbols-outlined text-lg">public</span>
+                                <Link href="https://www.facebook.com/illashimweadventure" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook" className="border border-cream/20 rounded-full p-3 hover:border-safari-green hover:text-safari-green transition-all min-w-[44px] min-h-[44px] flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-lg" aria-hidden="true">public</span>
                                 </Link>
-                                <Link href="https://www.instagram.com/illashimwe_adventure" target="_blank" className="border border-cream/20 rounded-full p-2 hover:border-safari-green hover:text-safari-green transition-all">
-                                    <span className="material-symbols-outlined text-lg">photo_camera</span>
+                                <Link href="https://www.instagram.com/illashimwe_adventure" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" className="border border-cream/20 rounded-full p-3 hover:border-safari-green hover:text-safari-green transition-all min-w-[44px] min-h-[44px] flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-lg" aria-hidden="true">photo_camera</span>
                                 </Link>
                             </div>
                         </div>

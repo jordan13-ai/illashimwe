@@ -77,6 +77,7 @@ export default function Navbar() {
                                 src={item.featured.image}
                                 alt={item.featured.title}
                                 fill
+                                loading="lazy"
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                                 sizes="360px"
                             />

@@ -15,7 +15,7 @@ export default function Accommodation() {
                                 Rest in Comfort
                             </p>
                         </div>
-                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight text-deep-brown leading-none mb-6">
+                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black uppercase tracking-tight text-deep-brown leading-none mb-6">
                             Hand-Picked <br /> Lodges
                         </h2>
                         <p className="text-gray-500 text-lg leading-relaxed font-light">
@@ -43,6 +43,7 @@ export default function Accommodation() {
                                         src={lodge.image}
                                         alt={lodge.name}
                                         fill
+                                        loading="lazy"
                                         className="object-cover transition-transform duration-[2s] group-hover:scale-105"
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />

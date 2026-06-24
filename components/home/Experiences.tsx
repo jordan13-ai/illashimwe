@@ -18,7 +18,7 @@ export default function Experiences() {
                         <div className="w-12 h-[1px] bg-primary" />
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.1] mb-8 anim-fade-up anim-delay-1">
+                    <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.1] mb-8 anim-fade-up anim-delay-1">
                         Choose your <br className="hidden md:block"/> <span className="text-white">Experience</span>
                     </h2>
 
@@ -41,7 +41,7 @@ export default function Experiences() {
                                     exp.id === "beach" ? "/destinations/zanzibar" :
                                     exp.id === "trekking" ? "/kilimanjaro" : "#"
                                 }
-                                className="group block h-[500px] relative rounded-2xl overflow-hidden cursor-pointer"
+                                className="group block h-[380px] md:h-[500px] relative rounded-2xl overflow-hidden cursor-pointer"
                             >
                                 <Image
                                     src={exp.image}

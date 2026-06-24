@@ -10,7 +10,7 @@ export default function BrandQuote() {
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-center relative z-10">
 
                 {/* Image Side */}
-                <div className="relative h-[650px] lg:h-[750px] w-full max-w-md mx-auto lg:max-w-none rounded-t-[300px] rounded-b-[30px] overflow-hidden order-2 lg:order-1 transform transition-transform duration-700 group anim-fade-left">
+                <div className="relative h-[420px] md:h-[550px] lg:h-[750px] w-full max-w-md mx-auto lg:max-w-none rounded-t-[100px] md:rounded-t-[200px] lg:rounded-t-[300px] rounded-b-[30px] overflow-hidden order-2 lg:order-1 transform transition-transform duration-700 group anim-fade-left">
                     <Image
                         src="/brand_quote_camp.webp"
                         alt="The Illashimwe Legacy - Mobile Camp"

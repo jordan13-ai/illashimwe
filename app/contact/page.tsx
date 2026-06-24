@@ -66,11 +66,10 @@ export default function ContactPage() {
             </div>
 
             {/* Google Maps — Arusha, Tanzania */}
-            <div className="h-[400px] w-full mt-20">
+            <div className="relative w-full mt-20 aspect-[16/9] md:aspect-[21/9] lg:h-[420px] lg:aspect-auto">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63690.42156454783!2d36.61698322090819!3d-3.3869143632716826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18371eb0b67a12e3%3A0xde50c2c4de70a8da!2sArusha%2C+Tanzania!5e0!3m2!1sen!2sus!4v1719000000000"
-                    width="100%"
-                    height="100%"
+                    className="absolute inset-0 w-full h-full"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
