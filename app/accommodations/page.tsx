@@ -1,8 +1,13 @@
+import { Metadata } from "next";
 import { ACCOMMODATIONS } from "@/data/accommodations";
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TrustBar from "@/components/home/TrustBar";
+
+export const metadata: Metadata = {
+    title: "Safari Lodges & Camps | Hand-Picked Tanzania Accommodations",
+    description: "Discover our curated selection of luxury lodges, tented camps, and boutique properties across Tanzania's top safari destinations. From Serengeti to Zanzibar.",
+};
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function AccommodationsPage() {

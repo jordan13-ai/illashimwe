@@ -1,5 +1,10 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Health & Safety on Safari | Tanzania Travel Tips",
+    description: "Essential health and safety information for your Tanzania safari — vaccinations, malaria prevention, altitude sickness on Kilimanjaro, and emergency protocols.",
+};
 
 export default function HealthSafetyPage() {
     return (

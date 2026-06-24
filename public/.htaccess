@@ -100,12 +100,12 @@ Options -Indexes
 </IfModule>
 
 # ─────────────────────────────────────────────
-# FORCE HTTPS (uncomment when SSL is active)
+# FORCE HTTPS
 # ─────────────────────────────────────────────
-# <IfModule mod_rewrite.c>
-#   RewriteCond %{HTTPS} off
-#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-# </IfModule>
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
 
 # ─────────────────────────────────────────────
 # PROTECT SENSITIVE FILES

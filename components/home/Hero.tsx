@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SafariQuiz = dynamic(() => import("./SafariQuiz"), { ssr: false });
@@ -51,14 +52,20 @@ export default function Hero() {
                     transition={{ duration: 2, ease: "easeInOut" }}
                     className="absolute inset-0 z-0"
                 >
-                    <motion.div 
-                        className="absolute inset-0 bg-cover bg-center"
+                    <motion.div
+                        className="absolute inset-0"
                         animate={{ scale: 1.1 }}
                         transition={{ duration: 15, ease: "linear" }}
-                        style={{
-                            backgroundImage: `url("${backgrounds[currentBg]}")`
-                        }}
-                    />
+                    >
+                        <Image
+                            src={backgrounds[currentBg]}
+                            alt=""
+                            fill
+                            className="object-cover object-center"
+                            priority={currentBg === 0}
+                            sizes="100vw"
+                        />
+                    </motion.div>
                 </motion.div>
             </AnimatePresence>
 
@@ -115,9 +122,9 @@ export default function Hero() {
                     >
                         Design Your Journey
                     </button>
-                    <button className="text-white px-12 py-4 rounded-full font-bold uppercase tracking-widest text-sm border border-white/50 hover:bg-white hover:text-deep-brown transition-all backdrop-blur-sm w-full sm:w-auto">
+                    <a href="/safari" className="text-white px-12 py-4 rounded-full font-bold uppercase tracking-widest text-sm border border-white/50 hover:bg-white hover:text-deep-brown transition-all backdrop-blur-sm w-full sm:w-auto text-center">
                         View Safaris
-                    </button>
+                    </a>
                 </motion.div>
             </div>
             

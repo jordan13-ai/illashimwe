@@ -1,5 +1,11 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Terms & Conditions | Illashimwe Adventure",
+    description: "Read the terms and conditions governing bookings, cancellations, payments, and travel with Illashimwe Adventure.",
+    robots: { index: false, follow: false },
+};
 
 export default function TermsPage() {
     return (

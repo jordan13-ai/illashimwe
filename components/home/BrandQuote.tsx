@@ -16,6 +16,7 @@ export default function BrandQuote() {
                         alt="The Illashimwe Legacy - Mobile Camp"
                         fill
                         className="object-cover transition-transform duration-[2s] group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 transition-opacity duration-700"></div>
                     <div className="absolute inset-4 rounded-t-[280px] rounded-b-[15px] border border-white/20 scale-[0.98] group-hover:scale-100 transition-all duration-700 pointer-events-none" />

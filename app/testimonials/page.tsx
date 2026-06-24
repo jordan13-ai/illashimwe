@@ -88,12 +88,18 @@ export default function TestimonialsPage() {
                         ))}
                     </div>
 
-                    {/* TripAdvisor Badge Placeholder */}
+                    {/* TripAdvisor CTA */}
                     <div className="mt-20 text-center">
-                        <p className="font-bold text-deep-brown mb-4 uppercase tracking-widest text-sm">Read more reviews on TripAdvisor</p>
-                        <div className="w-40 h-24 bg-white mx-auto border border-gray-200 rounded-lg flex items-center justify-center text-gray-400 text-xs">
-                            [TripAdvisor Widget]
-                        </div>
+                        <p className="font-bold text-deep-brown mb-6 uppercase tracking-widest text-sm">Read more reviews on TripAdvisor</p>
+                        <a
+                            href="https://www.tripadvisor.com/Search?q=Illashimwe+Adventure"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-3 bg-[#34E0A1] text-[#1A1A1A] font-bold px-8 py-4 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all text-sm uppercase tracking-wider"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                            View Us on TripAdvisor
+                        </a>
                     </div>
                 </div>
             </section>

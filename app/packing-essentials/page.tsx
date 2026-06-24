@@ -1,5 +1,10 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Safari Packing List | What to Bring to Tanzania",
+    description: "The ultimate Tanzania safari packing list — clothing, camera gear, medications, and documents. Expert advice from Illashimwe Adventure guides to pack light and right.",
+};
 
 export default function PackingPage() {
     return (

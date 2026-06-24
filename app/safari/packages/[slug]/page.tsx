@@ -50,6 +50,7 @@ export default async function SafariPackagePage({ params }: PageProps) {
                     fill
                     className="object-cover"
                     priority
+                    sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
@@ -195,6 +196,7 @@ export default async function SafariPackagePage({ params }: PageProps) {
                                                 alt={`${pkg.title} ${idx + 1}`}
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                sizes="(max-width: 768px) 100vw, 50vw"
                                             />
                                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
                                         </div>
@@ -264,7 +266,6 @@ export default async function SafariPackagePage({ params }: PageProps) {
 
                             {/* Help Card */}
                             <div className="bg-deep-brown p-8 rounded-[2rem] text-white relative overflow-hidden">
-                                <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20" />
                                 <div className="relative z-10 text-center">
                                     <h3 className="font-molot text-xl mb-3">Need Help Planning?</h3>
                                     <p className="text-white/70 text-sm mb-6 font-light">
@@ -309,6 +310,7 @@ export default async function SafariPackagePage({ params }: PageProps) {
                                         alt={relatedPkg.title}
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        sizes="(max-width: 768px) 100vw, 33vw"
                                     />
                                     <div className="absolute top-4 left-4 bg-white/90 text-deep-brown text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                                         {relatedPkg.duration}

@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
+import { X, ChevronLeft, CheckCircle2, Loader2 } from "lucide-react";
+// Replace YOUR_QUIZ_ID with your Formspree form ID after signing up at formspree.io
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_QUIZ_ID";
 
 interface SafariQuizProps {
     isOpen: boolean;
@@ -31,6 +34,7 @@ export default function SafariQuiz({ isOpen, onClose }: SafariQuizProps) {
     const [currentStep, setCurrentStep] = useState(0);
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
 
@@ -49,10 +53,19 @@ export default function SafariQuiz({ isOpen, onClose }: SafariQuizProps) {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here you would typically send the 'answers', 'name', and 'email' to your backend
-        setIsSubmitted(true);
+        setIsLoading(true);
+        try {
+            await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({ name, email, ...answers }),
+            });
+        } finally {
+            setIsLoading(false);
+            setIsSubmitted(true);
+        }
     };
 
     const resetQuiz = () => {
@@ -78,15 +91,19 @@ export default function SafariQuiz({ isOpen, onClose }: SafariQuizProps) {
                     initial={{ scale: 0.95, opacity: 0, y: 20 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="quiz-title"
                     className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col relative"
                 >
                     {/* Header */}
                     <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                        <h2 className="text-2xl font-serif font-bold text-gray-900">
+                        <h2 id="quiz-title" className="text-2xl font-serif font-bold text-gray-900">
                             Build Your Safari
                         </h2>
                         <button
                             onClick={onClose}
+                            aria-label="Close quiz"
                             className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
                         >
                             <X className="w-6 h-6" />
@@ -210,9 +227,10 @@ export default function SafariQuiz({ isOpen, onClose }: SafariQuizProps) {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="w-full bg-primary text-white py-4 rounded-xl font-bold tracking-wide shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all hover:-translate-y-0.5 mt-6"
+                                            disabled={isLoading}
+                                            className="w-full bg-primary text-white py-4 rounded-xl font-bold tracking-wide shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all hover:-translate-y-0.5 mt-6 disabled:opacity-60 flex items-center justify-center gap-2"
                                         >
-                                            Get My Custom Itinerary
+                                            {isLoading ? <><Loader2 className="w-5 h-5 animate-spin" />Sending…</> : "Get My Custom Itinerary"}
                                         </button>
                                     </form>
                                 </motion.div>

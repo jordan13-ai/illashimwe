@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import Hero from "@/components/home/Hero";
+
+export const metadata: Metadata = {
+    title: "Illashimwe Adventure | Premium Tanzania Safaris & Kilimanjaro Climbs",
+    description: "Private luxury safaris crafted in the heart of Tanzania. Serengeti Great Migration, Ngorongoro Crater, Kilimanjaro expeditions and Zanzibar escapes — tailored exclusively for you.",
+};
 import TrustBar from "@/components/home/TrustBar";
 import WhyChoose from "@/components/home/WhyChoose";
 import Experiences from "@/components/home/Experiences";

@@ -1,5 +1,10 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Cultural Etiquette in Tanzania | Safari Dos & Don'ts",
+    description: "Respect local customs and make meaningful connections. Learn Tanzania's cultural etiquette — greetings, dress codes, wildlife ethics, and community interaction tips.",
+};
 
 export default function CulturalEtiquettePage() {
     return (

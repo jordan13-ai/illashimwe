@@ -23,6 +23,7 @@ export default function SafariLandingPage() {
                     fill
                     className="object-cover"
                     priority
+                    sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-black/30" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2F3E2E] via-transparent to-black/20" />

@@ -1,5 +1,11 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | Illashimwe Adventure",
+    description: "How Illashimwe Adventure collects, uses, and protects your personal information when you browse our website or book a safari.",
+    robots: { index: false, follow: false },
+};
 
 export default function PrivacyPage() {
     return (

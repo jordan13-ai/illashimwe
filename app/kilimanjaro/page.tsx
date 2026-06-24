@@ -63,6 +63,7 @@ export default function KilimanjaroLandingPage() {
                     fill
                     className="object-cover"
                     priority
+                    sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2F3E2E] via-transparent to-black/30" />
@@ -142,6 +143,7 @@ export default function KilimanjaroLandingPage() {
                                     alt={route.name}
                                     fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
@@ -203,8 +205,7 @@ export default function KilimanjaroLandingPage() {
                         {/* Stacked Small Cards */}
                         <div className="flex flex-col gap-6">
                             <Link href="/kilimanjaro/packing-list" className="flex-1 bg-deep-brown rounded-3xl p-8 relative overflow-hidden group hover:shadow-xl transition-all">
-                                <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-10" />
-                                <div className="relative z-10">
+                                                <div className="relative z-10">
                                     <h3 className="font-molot text-2xl text-white mb-2">Packing List</h3>
                                     <p className="text-white/70 text-sm mb-4 leading-relaxed">Gear up correctly for -20°C summit nights.</p>
                                     <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-primary rotate-45 group-hover:rotate-0 transition-transform">
@@ -227,7 +228,6 @@ export default function KilimanjaroLandingPage() {
 
             {/* Final CTA */}
             <section className="py-24 bg-deep-brown relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20 bg-[url('/images/pattern.webp')] bg-repeat" />
                 <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
                     <h2 className="font-molot text-4xl md:text-5xl lg:text-6xl text-white mb-8">
                         Ready for the Challenge?

@@ -78,6 +78,7 @@ export default function Navbar() {
                                 alt={item.featured.title}
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                sizes="360px"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-deep-brown/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
@@ -199,6 +200,9 @@ export default function Navbar() {
                 <button
                     className="lg:hidden absolute right-4 top-1/2 -translate-y-1/2 text-cream hover:text-primary transition-colors p-2"
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                    aria-expanded={isOpen}
+                    aria-controls="mobile-menu"
                 >
                     <span className="material-symbols-outlined text-3xl">menu</span>
                 </button>
@@ -206,7 +210,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Overlay */}
             {isOpen && (
-                <div className="fixed inset-0 bg-deep-brown z-50 flex flex-col pt-24 px-6 lg:hidden animate-in slide-in-from-right duration-300 overflow-y-auto">
+                <div id="mobile-menu" className="fixed inset-0 bg-deep-brown z-50 flex flex-col pt-24 px-6 lg:hidden animate-in slide-in-from-right duration-300 overflow-y-auto">
                     <button
                         className="absolute top-6 right-4 text-cream hover:text-primary transition-colors p-2"
                         onClick={() => setIsOpen(false)}

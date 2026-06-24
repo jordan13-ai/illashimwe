@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -55,11 +54,11 @@ export default function Footer() {
                         <div className="lg:border-l border-white/10 lg:pl-8">
                             <h4 className="font-bold uppercase tracking-wider text-xs border-l-2 border-safari-green pl-3 mb-6 text-cream/90">Safari Categories</h4>
                             <ul className="space-y-3 text-sm text-cream/70">
-                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/packages/luxury">Private Luxury</Link></li>
-                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/packages/midrange">Midrange Safari</Link></li>
-                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/packages/budget">Budget Safari</Link></li>
-                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/packages/group">Shared Group</Link></li>
-                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/packages/flying">Flying Packages</Link></li>
+                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/private-luxury">Private Luxury</Link></li>
+                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/midrange-safari">Midrange Safari</Link></li>
+                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/budget-safari">Budget Safari</Link></li>
+                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/group-safari">Shared Group</Link></li>
+                                <li><Link className="hover:text-safari-green transition-colors block" href="/safari/flying-packages">Flying Packages</Link></li>
                                 <li><Link className="hover:text-safari-green transition-colors block" href="/experiences/honeymoon">Honeymooners</Link></li>
                                 <li><Link className="hover:text-safari-green transition-colors block" href="/day-trips">Day Tours</Link></li>
                             </ul>
@@ -75,7 +74,7 @@ export default function Footer() {
                                 <li><Link className="hover:text-safari-green transition-colors block" href="/kilimanjaro/routes/rongai">Rongai Route</Link></li>
                                 <li><Link className="hover:text-safari-green transition-colors block" href="/kilimanjaro/routes/northern-circuit">Northern Circuit</Link></li>
                                 <li><Link className="hover:text-safari-green transition-colors block" href="/kilimanjaro">Mount Meru</Link></li>
-                                <li><Link className="hover:text-safari-green transition-colors block" href="/kilimanjaro/information">Trekking Tips</Link></li>
+                                <li><Link className="hover:text-safari-green transition-colors block" href="/kilimanjaro/overview">Trekking Tips</Link></li>
                             </ul>
                         </div>
 

@@ -1,5 +1,10 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Tanzania Travel Guide | Safari Planning Tips",
+    description: "Everything you need to know before visiting Tanzania. Visa requirements, best time to visit, currency, health precautions, and insider tips from local safari experts.",
+};
 
 export default function GuidePage() {
     return (

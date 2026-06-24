@@ -1,5 +1,10 @@
-import React from 'react';
+import { Metadata } from "next";
 import ResourcePageLayout from '@/components/layout/ResourcePageLayout';
+
+export const metadata: Metadata = {
+    title: "Frequently Asked Questions | Tanzania Safari & Kilimanjaro",
+    description: "Answers to common questions about Tanzania safaris, Kilimanjaro climbs, visa requirements, best time to visit, what to pack, and booking with Illashimwe Adventure.",
+};
 
 export default function FAQPage() {
     return (
