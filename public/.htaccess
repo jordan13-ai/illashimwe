@@ -48,6 +48,19 @@ Options -Indexes
 </IfModule>
 
 # ─────────────────────────────────────────────
+# MIME TYPES (ensure server knows how to serve modern formats)
+# ─────────────────────────────────────────────
+<IfModule mod_mime.c>
+  AddType image/webp                      .webp
+  AddType image/avif                      .avif
+  AddType image/svg+xml                   .svg
+  AddType font/woff                       .woff
+  AddType font/woff2                      .woff2
+  AddType application/json               .json
+  AddType application/manifest+json      .webmanifest
+</IfModule>
+
+# ─────────────────────────────────────────────
 # GZIP COMPRESSION
 # ─────────────────────────────────────────────
 <IfModule mod_deflate.c>
