@@ -37,6 +37,8 @@ export default function ContactForm() {
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <input type="hidden" name="form_type" value="contact" />
+            {/* Honeypot — hidden from humans, bots fill it */}
+            <input type="text" name="_hp" aria-hidden="true" tabIndex={-1} className="hidden" autoComplete="off" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">

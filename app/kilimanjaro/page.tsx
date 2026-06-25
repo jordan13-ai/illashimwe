@@ -79,12 +79,16 @@ export default function KilimanjaroLandingPage() {
                         Journey to 5,895m with Tanzania&apos;s most trusted guides. Experience the adventure of a lifetime.
                     </p>
                     <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-deep-brown font-bold text-lg px-8 h-14 rounded-full">
-                            Explore Packages
-                        </Button>
-                        <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10 hover:text-white font-medium text-lg px-8 h-14 rounded-full">
-                            Talk to an Expert
-                        </Button>
+                        <Link href="/kilimanjaro/packages/standard">
+                            <Button size="lg" className="bg-primary hover:bg-primary/90 text-deep-brown font-bold text-lg px-8 h-14 rounded-full">
+                                Explore Packages
+                            </Button>
+                        </Link>
+                        <Link href="/contact">
+                            <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10 hover:text-white font-medium text-lg px-8 h-14 rounded-full">
+                                Talk to an Expert
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

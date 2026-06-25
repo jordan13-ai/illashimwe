@@ -40,6 +40,7 @@ export default function PlanTripForm() {
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
             <input type="hidden" name="form_type" value="plan-trip" />
+            <input type="text" name="_hp" aria-hidden="true" tabIndex={-1} className="hidden" autoComplete="off" />
 
             {/* Row 1: Names */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

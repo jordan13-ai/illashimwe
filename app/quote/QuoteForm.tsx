@@ -39,6 +39,7 @@ export default function QuoteForm() {
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
             <input type="hidden" name="form_type" value="quote" />
+            <input type="text" name="_hp" aria-hidden="true" tabIndex={-1} className="hidden" autoComplete="off" />
 
             {/* Names */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
