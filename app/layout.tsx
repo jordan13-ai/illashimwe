@@ -4,6 +4,7 @@ import { Noto_Serif, Noto_Sans, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/layout/Footer";
+import FloatingWidgets from "@/components/layout/FloatingWidgets";
 
 const molot = localFont({
   src: "../public/font/Molot.otf",
@@ -179,6 +180,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <FloatingWidgets />
       </body>
     </html>
   );
