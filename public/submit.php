@@ -3,7 +3,14 @@
  * Illashimwe Adventure — cPanel PHP Form Handler
  * Handles: contact, plan-trip, quote, safari-quiz
  * Sends email via cPanel's built-in mail() function
+ *
+ * ─── CONFIGURATION ───────────────────────────────────────────────────────────
+ * Edit these two lines to match your cPanel email accounts:
  */
+const MAIL_TO   = 'info@illashimweadventures.com';       // receives all form submissions
+const MAIL_FROM = 'noreply@illashimweadventures.com';     // must be a real cPanel email account
+const MAIL_NAME = 'Illashimwe Adventure';                  // display name shown to recipients
+// ─────────────────────────────────────────────────────────────────────────────
 
 header('Content-Type: application/json');
 
@@ -45,7 +52,7 @@ if (!empty($data['_hp']) || !empty($data['website'])) {
 
 // ─── Build email content per form type ────────────────────────────────────────
 $form_type = clean($data['form_type'] ?? 'contact', 50);
-$to        = 'info@illashimweadventures.com';
+$to        = MAIL_TO;
 $rawEmail  = $data['email'] ?? '';
 
 switch ($form_type) {
@@ -140,7 +147,7 @@ if (!filter_var($safeReplyTo, FILTER_VALIDATE_EMAIL)) {
 }
 
 // ─── Build headers — safeEmail() guarantees no header injection ───────────────
-$headers  = "From: Illashimwe Adventure <noreply@illashimweadventures.com>\r\n";
+$headers  = "From: " . MAIL_NAME . " <" . MAIL_FROM . ">\r\n";
 $headers .= "Reply-To: {$safeReplyTo}\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
@@ -153,5 +160,5 @@ if ($sent) {
     echo json_encode(['success' => true]);
 } else {
     http_response_code(500);
-    echo json_encode(['error' => 'Mail delivery failed. Please contact us at info@illashimweadventures.com']);
+    echo json_encode(['error' => 'Mail delivery failed. Please contact us at ' . MAIL_TO]);
 }
