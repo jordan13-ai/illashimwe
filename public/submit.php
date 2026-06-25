@@ -1,18 +1,11 @@
 <?php
 /**
- * Illashimwe Adventure — cPanel SMTP Form Handler
- * Uses PHPMailer + SMTP authentication for reliable inbox delivery
- *
- * ─── YOUR SETTINGS — edit these before uploading ─────────────────────────────
+ * Illashimwe Adventure — Form Handler
+ * Change MAIL_TO to wherever you want enquiries delivered.
  */
-const SMTP_HOST = 'mail.illashimweadventures.com'; // your cPanel mail server
-const SMTP_USER = 'noreply@illashimweadventures.com'; // must exist in cPanel Email Accounts
-const SMTP_PASS = 'YOUR_NOREPLY_PASSWORD';          // password you set for noreply@ in cPanel
-const SMTP_PORT = 465;                              // 465 = SSL  |  587 = TLS
-const SMTP_ENCR = 'ssl';                            // 'ssl' for port 465, 'tls' for port 587
-const MAIL_TO   = 'info@illashimweadventures.com';  // inbox that receives all enquiries
+const MAIL_TO   = 'info@illashimweadventures.com';
+const MAIL_FROM = 'noreply@illashimweadventures.com';
 const MAIL_NAME = 'Illashimwe Adventure';
-// ─────────────────────────────────────────────────────────────────────────────
 
 header('Content-Type: application/json');
 
@@ -21,20 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Method not allowed']);
     exit;
 }
-
-// Load PHPMailer (3 files uploaded to public_html/phpmailer/)
-$base = __DIR__ . '/phpmailer/';
-if (!file_exists($base . 'PHPMailer.php')) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Mail library missing. See setup instructions.']);
-    exit;
-}
-require $base . 'Exception.php';
-require $base . 'PHPMailer.php';
-require $base . 'SMTP.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 function clean(string $val, int $maxLen = 500): string {
     return mb_substr(htmlspecialchars(strip_tags(trim($val)), ENT_QUOTES, 'UTF-8'), 0, $maxLen);
@@ -45,7 +24,6 @@ function safeEmail(string $email): string {
     return mb_substr($email, 0, 254);
 }
 
-// Accept JSON (SafariQuiz) or FormData (all other forms)
 $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
 if (strpos($contentType, 'application/json') !== false) {
     $data = json_decode(file_get_contents('php://input'), true) ?? [];
@@ -53,7 +31,7 @@ if (strpos($contentType, 'application/json') !== false) {
     $data = $_POST;
 }
 
-// Honeypot — bots fill hidden fields, humans don't
+// Honeypot spam block
 if (!empty($data['_hp']) || !empty($data['website'])) {
     echo json_encode(['success' => true]);
     exit;
@@ -68,8 +46,7 @@ switch ($form_type) {
         $name    = clean($data['firstName'] ?? '') . ' ' . clean($data['lastName'] ?? '');
         $message = clean($data['message'] ?? '', 2000);
         $subject = 'New Contact Message — Illashimwe Adventure';
-        $body  = "=== CONTACT FORM ===\n\n";
-        $body .= "Name:    {$name}\n";
+        $body  = "Name:    {$name}\n";
         $body .= "Email:   {$rawEmail}\n\n";
         $body .= "Message:\n{$message}\n";
         break;
@@ -87,8 +64,7 @@ switch ($form_type) {
         $infants       = clean($data['infants'] ?? '', 5);
         $comments      = clean($data['comments'] ?? '', 2000);
         $subject = 'New Trip Enquiry — Illashimwe Adventure';
-        $body  = "=== TRIP PLANNING ENQUIRY ===\n\n";
-        $body .= "Name:          {$name}\n";
+        $body  = "Name:          {$name}\n";
         $body .= "Email:         {$rawEmail}\n";
         $body .= "Phone:         {$phone}\n";
         $body .= "Nationality:   {$nationality}\n\n";
@@ -113,8 +89,7 @@ switch ($form_type) {
         $currency    = clean($data['currency'] ?? 'USD', 5);
         $details     = clean($data['details'] ?? '', 2000);
         $subject = 'New Quote Request — Illashimwe Adventure';
-        $body  = "=== QUOTE REQUEST ===\n\n";
-        $body .= "Name:        {$name}\n";
+        $body  = "Name:        {$name}\n";
         $body .= "Email:       {$rawEmail}\n";
         $body .= "Phone:       {$phone}\n\n";
         $body .= "Destination: {$destination}\n";
@@ -131,8 +106,7 @@ switch ($form_type) {
         $answer1 = clean((string)($data[1] ?? ''), 100);
         $answer2 = clean((string)($data[2] ?? ''), 100);
         $subject = 'New Safari Quiz — Illashimwe Adventure';
-        $body  = "=== SAFARI QUIZ ===\n\n";
-        $body .= "Name:  {$name}\n";
+        $body  = "Name:  {$name}\n";
         $body .= "Email: {$rawEmail}\n\n";
         $body .= "Q1 — Who is traveling?   {$answer0}\n";
         $body .= "Q2 — Main focus?          {$answer1}\n";
@@ -152,28 +126,13 @@ if (!filter_var($safeReplyTo, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// Send via SMTP
-try {
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host       = SMTP_HOST;
-    $mail->SMTPAuth   = true;
-    $mail->Username   = SMTP_USER;
-    $mail->Password   = SMTP_PASS;
-    $mail->SMTPSecure = SMTP_ENCR;
-    $mail->Port       = SMTP_PORT;
+$headers  = "From: " . MAIL_NAME . " <" . MAIL_FROM . ">\r\n";
+$headers .= "Reply-To: {$safeReplyTo}\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-    $mail->setFrom(SMTP_USER, MAIL_NAME);
-    $mail->addAddress(MAIL_TO);
-    $mail->addReplyTo($safeReplyTo);
+$sent = mail(MAIL_TO, $subject, $body, $headers);
 
-    $mail->Subject = $subject;
-    $mail->Body    = $body;
-
-    $mail->send();
-    echo json_encode(['success' => true]);
-
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Mail failed: ' . $mail->ErrorInfo]);
-}
+echo $sent
+    ? json_encode(['success' => true])
+    : json_encode(['error' => 'Failed to send. Email us at ' . MAIL_TO]);
