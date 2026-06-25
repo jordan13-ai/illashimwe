@@ -1,58 +1,65 @@
 <?php
 /**
- * Illashimwe Adventure — cPanel PHP Form Handler
- * Handles: contact, plan-trip, quote, safari-quiz
- * Sends email via cPanel's built-in mail() function
+ * Illashimwe Adventure — cPanel SMTP Form Handler
+ * Uses PHPMailer + SMTP authentication for reliable inbox delivery
  *
- * ─── CONFIGURATION ───────────────────────────────────────────────────────────
- * Edit these two lines to match your cPanel email accounts:
+ * ─── YOUR SETTINGS — edit these before uploading ─────────────────────────────
  */
-const MAIL_TO   = 'info@illashimweadventures.com';       // receives all form submissions
-const MAIL_FROM = 'noreply@illashimweadventures.com';     // must be a real cPanel email account
-const MAIL_NAME = 'Illashimwe Adventure';                  // display name shown to recipients
+const SMTP_HOST = 'mail.illashimweadventures.com'; // your cPanel mail server
+const SMTP_USER = 'noreply@illashimweadventures.com'; // must exist in cPanel Email Accounts
+const SMTP_PASS = 'YOUR_NOREPLY_PASSWORD';          // password you set for noreply@ in cPanel
+const SMTP_PORT = 465;                              // 465 = SSL  |  587 = TLS
+const SMTP_ENCR = 'ssl';                            // 'ssl' for port 465, 'tls' for port 587
+const MAIL_TO   = 'info@illashimweadventures.com';  // inbox that receives all enquiries
+const MAIL_NAME = 'Illashimwe Adventure';
 // ─────────────────────────────────────────────────────────────────────────────
 
 header('Content-Type: application/json');
 
-// ─── Block non-POST requests ───────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
     exit;
 }
 
-// ─── Sanitize helper — strips HTML tags, trims, limits length ─────────────────
+// Load PHPMailer (3 files uploaded to public_html/phpmailer/)
+$base = __DIR__ . '/phpmailer/';
+if (!file_exists($base . 'PHPMailer.php')) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Mail library missing. See setup instructions.']);
+    exit;
+}
+require $base . 'Exception.php';
+require $base . 'PHPMailer.php';
+require $base . 'SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 function clean(string $val, int $maxLen = 500): string {
     return mb_substr(htmlspecialchars(strip_tags(trim($val)), ENT_QUOTES, 'UTF-8'), 0, $maxLen);
 }
-
-// ─── Strict email sanitizer for use in headers (no newlines allowed) ──────────
 function safeEmail(string $email): string {
-    // Remove any characters that could inject extra headers
     $email = preg_replace('/[\r\n\t]/', '', trim($email));
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     return mb_substr($email, 0, 254);
 }
 
-// ─── Accept JSON body (SafariQuiz) or FormData (all other forms) ───────────────
+// Accept JSON (SafariQuiz) or FormData (all other forms)
 $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
 if (strpos($contentType, 'application/json') !== false) {
-    $raw = file_get_contents('php://input');
-    $data = json_decode($raw, true) ?? [];
+    $data = json_decode(file_get_contents('php://input'), true) ?? [];
 } else {
     $data = $_POST;
 }
 
-// ─── Honeypot check — bots fill hidden fields, humans don't ───────────────────
+// Honeypot — bots fill hidden fields, humans don't
 if (!empty($data['_hp']) || !empty($data['website'])) {
-    // Silently succeed so bots don't know they were blocked
     echo json_encode(['success' => true]);
     exit;
 }
 
-// ─── Build email content per form type ────────────────────────────────────────
 $form_type = clean($data['form_type'] ?? 'contact', 50);
-$to        = MAIL_TO;
 $rawEmail  = $data['email'] ?? '';
 
 switch ($form_type) {
@@ -138,7 +145,6 @@ switch ($form_type) {
         exit;
 }
 
-// ─── Validate & sanitize email (used in Reply-To header) ──────────────────────
 $safeReplyTo = safeEmail($rawEmail);
 if (!filter_var($safeReplyTo, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
@@ -146,19 +152,28 @@ if (!filter_var($safeReplyTo, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// ─── Build headers — safeEmail() guarantees no header injection ───────────────
-$headers  = "From: " . MAIL_NAME . " <" . MAIL_FROM . ">\r\n";
-$headers .= "Reply-To: {$safeReplyTo}\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+// Send via SMTP
+try {
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host       = SMTP_HOST;
+    $mail->SMTPAuth   = true;
+    $mail->Username   = SMTP_USER;
+    $mail->Password   = SMTP_PASS;
+    $mail->SMTPSecure = SMTP_ENCR;
+    $mail->Port       = SMTP_PORT;
 
-// ─── Send ──────────────────────────────────────────────────────────────────────
-$sent = mail($to, $subject, $body, $headers);
+    $mail->setFrom(SMTP_USER, MAIL_NAME);
+    $mail->addAddress(MAIL_TO);
+    $mail->addReplyTo($safeReplyTo);
 
-if ($sent) {
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+
+    $mail->send();
     echo json_encode(['success' => true]);
-} else {
+
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Mail delivery failed. Please contact us at ' . MAIL_TO]);
+    echo json_encode(['error' => 'Mail failed: ' . $mail->ErrorInfo]);
 }
