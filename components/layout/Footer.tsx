@@ -31,7 +31,7 @@ export default function Footer() {
                         <div className="flex flex-col gap-6">
                             <div className="mb-2">
                                 <Image
-                                    src="/logo/illashimwe logo.webp"
+                                    src="/logo/illashimwe-logo.webp"
                                     alt="Illashimwe Adventure"
                                     width={180}
                                     height={80}

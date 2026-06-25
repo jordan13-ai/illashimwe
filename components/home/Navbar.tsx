@@ -163,7 +163,7 @@ export default function Navbar() {
                 <div className="flex-shrink-0 relative z-50 mx-auto transform transition-transform duration-300 hover:scale-105">
                     <Link href="/" className="block">
                         <Image
-                            src="/logo/illashimwe logo.webp"
+                            src="/logo/illashimwe-logo.webp"
                             alt="Illashimwe Adventure"
                             width={240}
                             height={80}

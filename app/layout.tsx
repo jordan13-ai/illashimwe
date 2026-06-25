@@ -130,7 +130,7 @@ export default function RootLayout({
               description:
                 "Private luxury safaris crafted in the heart of Tanzania.",
               url: SITE_URL,
-              logo: `${SITE_URL}/logo/illashimwe logo.webp`,
+              logo: `${SITE_URL}/logo/illashimwe-logo.webp`,
               image: `${SITE_URL}/hero_serengeti_migration_1768491216654.webp`,
               telephone: "+255755310533",
               email: "info@illashimweadventures.com",
