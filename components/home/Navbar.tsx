@@ -146,8 +146,8 @@ export default function Navbar() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b",
                 scrolled || activeDropdown
-                    ? "bg-deep-brown/95 backdrop-blur-md shadow-2xl py-0 border-white/10"
-                    : "bg-transparent py-4 border-transparent"
+                    ? "bg-deep-brown/98 backdrop-blur-md shadow-2xl py-0 border-white/10"
+                    : "bg-deep-brown/80 backdrop-blur-sm py-2 border-white/10"
             )}
         >
             <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative flex items-center justify-between h-20 md:h-24 transition-all duration-300" onMouseLeave={() => setActiveDropdown(null)}>
